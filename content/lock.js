@@ -84,12 +84,7 @@
   @media (prefers-reduced-motion: reduce) { .screen, .pin.shake { transition: none; animation: none; } }
   `;
 
-  const MARK = `<svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
-    <rect width="32" height="32" rx="8" fill="var(--velvet)"/>
-    <rect x="6" y="6.5" width="20" height="2.2" rx="1.1" fill="#fff"/>
-    <rect x="7.2" y="10.5" width="5" height="15" rx="2.5" fill="#fff"/>
-    <rect x="13.5" y="10.5" width="5" height="15" rx="2.5" fill="#fff" fill-opacity=".84"/>
-    <rect x="19.8" y="10.5" width="5" height="15" rx="2.5" fill="#fff" fill-opacity=".64"/></svg>`;
+  const MARK = `<svg class="mark" viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="tirai-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6f68e6"/><stop offset=".55" stop-color="#4639c4"/><stop offset="1" stop-color="#211d66"/></linearGradient><linearGradient id="tirai-sheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient><radialGradient id="tirai-glow" cx=".5" cy=".55" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient><linearGradient id="tirai-rod" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#e4e6f3"/><stop offset="1" stop-color="#a9adcb"/></linearGradient><linearGradient id="tirai-slat" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#eef0fa"/><stop offset="1" stop-color="#a7aed8"/></linearGradient><linearGradient id="tirai-rodshadow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b1850" stop-opacity=".35"/><stop offset="1" stop-color="#1b1850" stop-opacity="0"/></linearGradient></defs><rect width="512" height="512" rx="112" fill="url(#tirai-bg)"/><rect width="512" height="512" rx="112" fill="url(#tirai-sheen)"/><ellipse cx="256" cy="282" rx="190" ry="170" fill="url(#tirai-glow)"/><g fill="url(#tirai-slat)" fill-opacity=".94"><path d="M110 134h31v262l-31-8z"/><path d="M139 134h31v270l-31-8z"/><path d="M168 134h31v264l-31-8z"/><path d="M197 134h31v272l-31-8z"/><path d="M226 134h31v266l-31-8z"/><path d="M255 134h31v274l-31-8z"/><path d="M284 134h31v266l-31-8z"/><path d="M313 134h31v272l-31-8z"/><path d="M342 134h31v264l-31-8z"/><path d="M371 134h31v270l-31-8z"/></g><rect x="104" y="128" width="304" height="26" fill="url(#tirai-rodshadow)"/><rect x="90" y="96" width="332" height="36" rx="18" fill="url(#tirai-rod)"/><rect x="104" y="101" width="304" height="7" rx="3.5" fill="#fff" fill-opacity=".9"/></svg>`;
 
   function buildUi() {
     const host = document.createElement("tirai-lock");

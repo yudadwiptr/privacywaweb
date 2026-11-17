@@ -65,7 +65,7 @@ a { color: var(--velvet); text-underline-offset: 3px; }
 .site-head { padding: 18px 0; }
 .site-head .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .logo { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-weight: 800; font-size: 20px; letter-spacing: -0.02em; }
-.logo svg { width: 34px; height: 34px; }
+.logo img, .logo svg { width: 34px; height: 34px; }
 .nav { display: flex; align-items: center; gap: 22px; font-size: 15px; }
 .nav a { color: var(--slate); text-decoration: none; }
 .nav a:hover { color: var(--ink); }
@@ -160,7 +160,7 @@ a { color: var(--velvet); text-underline-offset: 3px; }
 .lockscreen::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--velvet); }
 .demo.locked .lockscreen { transform: translateY(0); }
 .lockscreen .card { background: var(--paper); padding: 24px 26px 20px; border-radius: 18px; box-shadow: var(--shadow); width: min(300px, 90%); }
-.lockscreen svg { width: 42px; height: 42px; margin: 0 auto 10px; }
+.lockscreen img { width: 42px; height: 42px; margin: 0 auto 10px; }
 .lockscreen h3 { margin: 0; font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
 .lockscreen p { margin: 4px 0 14px; font-size: 13px; color: var(--slate); }
 .slots { position: relative; display: flex; justify-content: center; gap: 8px; }
@@ -215,7 +215,7 @@ kbd { font: 600 13px/1 inherit; font-family: inherit; padding: 3px 7px; border-r
 .lock-figure { background: repeating-linear-gradient(90deg, var(--fold-a) 0, var(--fold-b) 40px, var(--fold-a) 80px), var(--mist); border-radius: 22px; padding: 56px 24px; display: grid; place-items: center; position: relative; overflow: hidden; }
 .lock-figure::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px; background: var(--velvet); }
 .lock-figure .card { background: var(--paper); border-radius: 20px; padding: 28px; text-align: center; box-shadow: var(--shadow); width: min(320px, 100%); }
-.lock-figure svg { width: 48px; height: 48px; margin: 0 auto 12px; }
+.lock-figure img { width: 48px; height: 48px; margin: 0 auto 12px; }
 .lock-figure h3 { margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -0.02em; }
 .lock-figure p { margin: 4px 0 16px; font-size: 14px; color: var(--slate); }
 .lock-figure .slots span:nth-child(-n+2)::after { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--ink); }

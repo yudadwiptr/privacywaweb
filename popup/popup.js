@@ -201,7 +201,6 @@
     });
 
     if (hasChrome) {
-      $("#ver").textContent = chrome.runtime.getManifest().version;
       // keep in sync if the keyboard shortcut flips the curtain while the popup is open
       chrome.storage.onChanged.addListener((changes, area) => {
         if (area === "sync" && changes[STORAGE_KEY]) {

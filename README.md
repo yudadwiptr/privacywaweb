@@ -81,10 +81,10 @@ Folder `docs/` berisi landing page dengan SEO (meta tag, Open Graph, JSON-LD, si
 | `background.js` | Badge "off", pintasan keyboard, dan kunci saat browser dibuka |
 | `fonts/` | Plus Jakarta Sans (SIL OFL), dibundel supaya tidak ada request ke Google Fonts |
 | `icons/` | Ikon ekstensi 16/32/48/128 |
-| `assets/brand/logo.svg` | Logo sumber |
+| `assets/brand/logo.svg`, `logo-small.svg` | Logo sumber (versi kecil khusus ikon 16/32px) |
 | `docs/` | Landing page, kebijakan privasi, favicon, gambar OG |
 | `store/` | Teks listing, gambar promo, dan sumber HTML-nya |
-| `tools/make_icons.py` | Membuat ulang semua ikon dan favicon |
+| `tools/make_icons.py` | Membuat ulang semua ikon dan favicon dari SVG (butuh Chrome/Edge) |
 | `tools/render-promo.ps1` | Merender gambar OG, tile promo, dan screenshot store dengan Chrome headless |
 | `tools/build.py` | Membuat ZIP untuk tiap store |
 | `tools/lock-preview.html` | Halaman uji layar kunci tanpa memasang ekstensi |
