@@ -310,5 +310,14 @@
     }
   });
 
+  /* WhatsApp re-renders parts of the document; put the hiding style, the locked flag,
+     and the lock screen back if any of them got removed while locked. */
+  setInterval(() => {
+    if (!base.isConnected) (document.head || html).appendChild(base);
+    if (!L.hasPin(lock) || !lock.locked) return;
+    if (!html.hasAttribute(ATTR)) html.setAttribute(ATTR, "");
+    if (ui && !ui.host.isConnected) html.appendChild(ui.host);
+  }, 500);
+
   init();
 })();

@@ -21,6 +21,9 @@
     'img[src*=".cdn.whatsapp.net"]',
     'img[src^="data:image/jpeg"]',
     'img[src^="data:image/webp"]',
+    '[style*="blob:"]',
+    '[style*="mmg.whatsapp.net"]',
+    '[style*="data:image/jpeg"]',
     "video"
   ];
 
@@ -111,16 +114,30 @@
     return out.join("\n");
   }
 
-  function apply() {
-    let style = document.getElementById(STYLE_ID);
-    if (!style) {
-      style = document.createElement("style");
-      style.id = STYLE_ID;
-      (document.head || document.documentElement).appendChild(style);
+  /* WhatsApp Web's newer builds re-render <head>, which can drop a <style> we added.
+     Keep our own element and put it back whenever it goes missing. */
+  let styleEl = null;
+  let css = "";
+
+  function ensureStyle() {
+    if (!styleEl) {
+      styleEl = document.createElement("style");
+      styleEl.id = STYLE_ID;
     }
-    style.textContent = buildCss(settings);
+    if (styleEl.textContent !== css) styleEl.textContent = css;
+    const parent = document.head || document.documentElement;
+    if (!styleEl.isConnected || styleEl.parentNode !== parent || styleEl !== parent.lastElementChild) {
+      parent.appendChild(styleEl); // last in <head>, so it wins ties with WhatsApp's own CSS
+    }
+  }
+
+  function apply() {
+    css = buildCss(settings);
+    ensureStyle();
     resetIdle();
   }
+
+  setInterval(ensureStyle, 1000);
 
   /* Idle detection */
   function goIdle() {
@@ -164,9 +181,6 @@
     }
   });
 
-  // <head> may not exist at document_start; make sure our style survives.
-  document.addEventListener("DOMContentLoaded", () => {
-    const style = document.getElementById(STYLE_ID);
-    if (style && document.head && style.parentNode !== document.head) document.head.appendChild(style);
-  });
+  // <head> may not exist at document_start; move our style into it once it does.
+  document.addEventListener("DOMContentLoaded", ensureStyle);
 })();
