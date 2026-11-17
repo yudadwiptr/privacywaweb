@@ -1,7 +1,8 @@
-// Chrome runs this as a service worker; Firefox loads the shared files first via background.scripts.
-if (typeof importScripts === "function" && !self.TIRAI_LOCK) {
-  importScripts("shared/defaults.js", "shared/lock.js");
-}
+// Module service worker: static imports are fetched together with this file when the
+// worker is registered, so they can't fail later the way importScripts() can.
+// The shared files are plain scripts that attach self.TIRAI and self.TIRAI_LOCK.
+import "./shared/defaults.js";
+import "./shared/lock.js";
 
 const KEY = self.TIRAI.STORAGE_KEY;
 const L = self.TIRAI_LOCK;

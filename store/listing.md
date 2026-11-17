@@ -9,8 +9,8 @@ Images are in `store/images/` (regenerate with `tools/render-promo.ps1`).
 | Screenshots 1280×800 | `store/images/screenshot-*.png` | Chrome (1–5), Edge, AMO |
 | Small promo tile 440×280 | `store/images/small-tile-440x280.png` | Chrome, Edge |
 | Marquee 1400×560 | `store/images/marquee-1400x560.png` | Chrome (optional, for featuring) |
-| Privacy policy URL | https://yudadwiptr.github.io/privacywaweb/privacy.html | all |
-| Homepage URL | https://yudadwiptr.github.io/privacywaweb/ | all |
+| Privacy policy URL | https://tiraiwhatsapp.vercel.app/privacy.html | all |
+| Homepage URL | https://tiraiwhatsapp.vercel.app/ | all |
 | Support URL | https://github.com/yudadwiptr/privacywaweb/issues | all |
 
 Category: **Productivity → Tools** (Chrome), **Productivity** (Edge), **Privacy & Security** (Firefox).

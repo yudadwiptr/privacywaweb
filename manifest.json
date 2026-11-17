@@ -5,7 +5,7 @@
   "short_name": "__MSG_appShortName__",
   "version": "1.0.6",
   "description": "__MSG_appDescription__",
-  "homepage_url": "https://yudadwiptr.github.io/privacywaweb/",
+  "homepage_url": "https://tiraiwhatsapp.vercel.app/",
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
@@ -21,7 +21,8 @@
     }
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
   "permissions": ["storage"],
   "content_scripts": [

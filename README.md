@@ -4,7 +4,7 @@
 
 <p align="center">Blur chat, foto, nama, dan foto profil di WhatsApp Web. Arahkan kursor untuk melihat, kunci dengan PIN saat ditinggal.</p>
 
-<p align="center"><a href="https://yudadwiptr.github.io/privacywaweb/">Situs</a> · <a href="https://yudadwiptr.github.io/privacywaweb/privacy.html">Kebijakan privasi</a> · <a href="https://github.com/yudadwiptr/privacywaweb/issues">Laporkan masalah</a></p>
+<p align="center"><a href="https://tiraiwhatsapp.vercel.app/">Situs</a> · <a href="https://tiraiwhatsapp.vercel.app/privacy.html">Kebijakan privasi</a> · <a href="https://github.com/yudadwiptr/privacywaweb/issues">Laporkan masalah</a></p>
 
 ![Tirai memburamkan chat di WhatsApp Web](store/images/screenshot-1-blur.png)
 
@@ -63,9 +63,11 @@ Teks listing (Indonesia dan Inggris), jawaban form privasi Chrome Web Store, dan
 
 Sebelum rilis versi baru, naikkan `version` di `manifest.json`.
 
-## Situs (GitHub Pages)
+## Situs
 
-Folder `docs/` berisi landing page dengan SEO (meta tag, Open Graph, JSON-LD, sitemap, robots), favicon, dan kebijakan privasi. Aktifkan di **Settings → Pages → Deploy from a branch → `main` / `docs`**. Alamatnya akan menjadi https://yudadwiptr.github.io/privacywaweb/.
+Folder `docs/` berisi landing page dengan SEO (meta tag, Open Graph, JSON-LD, sitemap, robots), favicon, dan kebijakan privasi. Situsnya di-deploy ke Vercel di https://tiraiwhatsapp.vercel.app/. `vercel.json` memberi tahu Vercel untuk menyajikan folder `docs/` tanpa proses build.
+
+Kalau domainnya berganti, ganti `https://tiraiwhatsapp.vercel.app/` di `docs/`, `manifest.json`, `README.md`, dan `store/listing.md`.
 
 ## Struktur
 
@@ -83,6 +85,7 @@ Folder `docs/` berisi landing page dengan SEO (meta tag, Open Graph, JSON-LD, si
 | `icons/` | Ikon ekstensi 16/32/48/128 |
 | `assets/brand/logo.svg`, `logo-small.svg` | Logo sumber (versi kecil khusus ikon 16/32px) |
 | `docs/` | Landing page, kebijakan privasi, favicon, gambar OG |
+| `vercel.json` | Konfigurasi deploy Vercel (menyajikan `docs/`) |
 | `store/` | Teks listing, gambar promo, dan sumber HTML-nya |
 | `tools/make_icons.py` | Membuat ulang semua ikon dan favicon dari SVG (butuh Chrome/Edge) |
 | `tools/render-promo.ps1` | Merender gambar OG, tile promo, dan screenshot store dengan Chrome headless |

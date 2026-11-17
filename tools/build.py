@@ -30,7 +30,7 @@ def manifest_for(target, base):
     """manifest.json in the repo is the Chrome one (so Load unpacked works). Firefox gets its tweaks here."""
     m = json.loads(json.dumps(base))
     if target == "firefox":
-        m["background"] = {"scripts": ["shared/defaults.js", "shared/lock.js", "background.js"]}
+        m["background"] = {"scripts": ["background.js"], "type": "module"}
         m["browser_specific_settings"] = {
             "gecko": {
                 "id": "tirai@yudadwiptr.github.io",
