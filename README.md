@@ -95,7 +95,7 @@ Folder `docs/` berisi landing page dengan SEO (meta tag, Open Graph, JSON-LD, si
 
 WhatsApp Web sering mengganti struktur HTML-nya. Semua selector ada di objek `SELECTORS` di `content/content.js`. Inspect elemen yang lolos di DevTools, lalu tambahkan selector-nya ke kategori yang sesuai. Selector yang tidak valid atau tidak cocok diabaikan dengan aman karena dibungkus `:is()`.
 
-Cara cepat: buka chat yang ada fotonya, tempel isi `tools/diagnose-wa.js` di DevTools Console, lalu kirim laporan JSON yang tersalin ke clipboard. Laporan itu hanya berisi nama tag, atribut, dan class, tanpa isi chat.
+Cara cepat: buka chat yang ada fotonya, klik ikon Tirai, lalu klik **Ada yang tidak ter-blur? Salin laporan** di bagian bawah popup. Kirim laporan JSON yang tersalin ke clipboard. (Tanpa ekstensi, isi `tools/diagnose-wa.js` bisa ditempel di DevTools Console.) Laporan itu hanya berisi nama tag, atribut, dan class, tanpa isi chat.
 
 Foto dan video dikenali dari sumbernya (`blob:`, CDN media WhatsApp, atau thumbnail JPEG), bukan dari class, jadi lebih tahan terhadap perubahan tampilan WhatsApp.
 

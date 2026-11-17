@@ -3,7 +3,7 @@
   "default_locale": "id",
   "name": "__MSG_appName__",
   "short_name": "__MSG_appShortName__",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "__MSG_appDescription__",
   "homepage_url": "https://yudadwiptr.github.io/privacywaweb/",
   "icons": {
@@ -27,7 +27,7 @@
   "content_scripts": [
     {
       "matches": ["https://web.whatsapp.com/*"],
-      "js": ["shared/defaults.js", "shared/lock.js", "content/content.js", "content/lock.js"],
+      "js": ["shared/defaults.js", "shared/lock.js", "content/content.js", "content/lock.js", "content/diagnose.js"],
       "run_at": "document_start"
     }
   ],
