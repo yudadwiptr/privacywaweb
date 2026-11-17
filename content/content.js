@@ -12,8 +12,11 @@
 
   /* Media is matched by where the image comes from, not by class names: WhatsApp Web's
      newer builds use generated classes that change, but chat media is always a blob:
-     URL, a WhatsApp media-CDN URL, or an inline JPEG/WebP thumbnail. Profile pictures
-     come from pps.whatsapp.net and are left to the "avatars" category. */
+     URL, a WhatsApp media-CDN URL, or an inline JPEG/WebP thumbnail.
+     Profile pictures can come from blob: too, so classifyAvatars() below marks them by
+     shape (small, square, clipped round) and media rules skip anything it marked. */
+  const AVATAR_ATTR = "data-tirai-avatar";
+  const IS_AVATAR = `[${AVATAR_ATTR}="1"]`;
   const NOT_AVATAR = ':not([src*="pps.whatsapp.net"])';
   const MEDIA_SOURCES = [
     `img[src^="blob:"]${NOT_AVATAR}`,
@@ -66,6 +69,7 @@
       'div[aria-label*="media" i] img:not(.emoji)'
     ],
     avatars: [
+      IS_AVATAR,
       'img[src*="pps.whatsapp.net"]',
       "#pane-side img:not(.emoji)",
       "#main header img:not(.emoji)",
@@ -96,7 +100,9 @@
     for (const [key, list] of Object.entries(SELECTORS)) {
       const item = s.items[key];
       if (!item || !item.on) continue;
-      const sel = `:is(${list.join(", ")})`;
+      // Profile pictures follow only the "Foto profil" switch.
+      const skip = key === "media" || key === "gallery" ? `:not(${IS_AVATAR})` : "";
+      const sel = `:is(${list.join(", ")})${skip}`;
       out.push(`${scope}${sel}{filter:blur(${s.blur}px) !important;transition:${ease} !important;}`);
       if (item.hover) {
         // Also reveal when hovering the direct parent: WhatsApp lays overlays (time, ticks,
@@ -138,6 +144,39 @@
   }
 
   setInterval(ensureStyle, 1000);
+
+  /* Avatar detection: an image (or background-image box) no bigger than 96px, square,
+     and clipped to a circle by itself or a same-sized wrapper. Chat photos are larger,
+     and reply thumbnails are small but only slightly rounded. */
+  function isRound(el, size) {
+    for (let e = el, i = 0; e && i < 4; e = e.parentElement, i++) {
+      const box = e.getBoundingClientRect();
+      if (i > 0 && (box.width > size + 8 || box.height > size + 8)) break; // wrapper is bigger than the picture
+      const r = getComputedStyle(e).borderTopLeftRadius;
+      if (r.endsWith("%") ? parseFloat(r) >= 40 : parseFloat(r) >= size / 2 - 2) return true;
+    }
+    return false;
+  }
+
+  function classify(el) {
+    const box = el.getBoundingClientRect();
+    if (!box.width || !box.height) return; // not laid out yet, try again later
+    const size = Math.max(box.width, box.height);
+    const avatar = size <= 96 && Math.abs(box.width - box.height) <= 3 && isRound(el, size);
+    el.setAttribute(AVATAR_ATTR, avatar ? "1" : "0");
+  }
+
+  function classifyAvatars() {
+    document
+      .querySelectorAll(`img:not([${AVATAR_ATTR}]), [style*="background-image"]:not([${AVATAR_ATTR}])`)
+      .forEach(classify);
+  }
+
+  setInterval(classifyAvatars, 400);
+  // Images that finish loading get classified right away instead of waiting for the next tick.
+  document.addEventListener("load", (e) => {
+    if (e.target instanceof HTMLImageElement && !e.target.hasAttribute(AVATAR_ATTR)) classify(e.target);
+  }, true);
 
   /* Idle detection */
   function goIdle() {
