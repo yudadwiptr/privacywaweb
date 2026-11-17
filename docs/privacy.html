@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kebijakan Privasi | Tirai untuk WhatsApp Web</title>
+  <meta name="description" content="Kebijakan privasi ekstensi Tirai: data apa yang disimpan, di mana, dan untuk apa. Tirai tidak mengumpulkan atau mengirim data pengguna." />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#4a3ad8" />
+  <link rel="canonical" href="https://yudadwiptr.github.io/privacywaweb/privacy.html" />
+  <link rel="icon" href="favicon.ico" sizes="48x48" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Kebijakan Privasi Tirai" />
+  <meta property="og:description" content="Tirai tidak mengumpulkan, menjual, atau mengirim data pengguna." />
+  <meta property="og:url" content="https://yudadwiptr.github.io/privacywaweb/privacy.html" />
+  <meta property="og:image" content="https://yudadwiptr.github.io/privacywaweb/og-image.png" />
+  <link rel="stylesheet" href="site.css" />
+</head>
+<body>
+  <header class="site-head">
+    <div class="wrap">
+      <a class="logo" href="./" aria-label="Tirai, beranda">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="7.5" fill="var(--velvet)" />
+          <rect x="6" y="6.5" width="20" height="2.2" rx="1.1" fill="#fff" />
+          <rect x="7.2" y="10.5" width="5" height="15" rx="2.5" fill="#fff" />
+          <rect x="13.5" y="10.5" width="5" height="15" rx="2.5" fill="#fff" fill-opacity=".84" />
+          <rect x="19.8" y="10.5" width="5" height="15" rx="2.5" fill="#fff" fill-opacity=".64" />
+        </svg>
+        Tirai
+      </a>
+      <nav class="nav" aria-label="Utama"><a href="./">Beranda</a></nav>
+    </div>
+  </header>
+
+  <main class="article">
+    <div class="wrap">
+      <h1>Kebijakan privasi</h1>
+      <p class="meta">Berlaku sejak 17 November 2026</p>
+
+      <p>Tirai adalah ekstensi browser yang menyamarkan isi WhatsApp Web dan bisa menguncinya dengan PIN. Kebijakan ini menjelaskan data apa yang dipakai Tirai dan di mana data itu disimpan.</p>
+
+      <h2>Ringkasnya</h2>
+      <ul>
+        <li>Tirai tidak mengumpulkan, menjual, atau membagikan data pribadi.</li>
+        <li>Tirai tidak membaca, menyalin, atau mengirim isi chat WhatsApp.</li>
+        <li>Tirai tidak punya server, tidak memakai analitik, dan tidak memuat kode dari luar.</li>
+      </ul>
+
+      <h2>Data yang disimpan di browser kamu</h2>
+      <table>
+        <thead><tr><th>Data</th><th>Tempat</th><th>Kegunaan</th></tr></thead>
+        <tbody>
+          <tr><td>Pengaturan blur dan tema</td><td><code>chrome.storage.sync</code></td><td>Mengingat pilihanmu. Jika sinkronisasi browser aktif, pengaturan ini ikut tersinkron lewat akun browser kamu.</td></tr>
+          <tr><td>Hash PIN, salt, dan pengaturan kunci</td><td><code>chrome.storage.local</code></td><td>Memeriksa PIN saat membuka kunci. PIN asli tidak pernah disimpan, dan data ini tidak ikut tersinkron.</td></tr>
+          <tr><td>Waktu aktivitas terakhir</td><td><code>chrome.storage.local</code></td><td>Menentukan kapan WhatsApp Web dikunci otomatis.</td></tr>
+          <tr><td>Penanda "kunci aktif"</td><td><code>localStorage</code> web.whatsapp.com</td><td>Menyembunyikan WhatsApp Web sejak halaman mulai dimuat, sebelum status kunci selesai dibaca. Isinya hanya angka 1.</td></tr>
+        </tbody>
+      </table>
+      <p>Semua data di atas tetap berada di perangkat kamu dan terhapus ketika ekstensi dihapus.</p>
+
+      <h2>Izin yang diminta</h2>
+      <ul>
+        <li><strong>storage</strong>: menyimpan pengaturan dan hash PIN seperti dijelaskan di atas.</li>
+        <li><strong>Akses ke web.whatsapp.com</strong>: memasang efek blur dan layar kunci. Tirai tidak berjalan di situs lain.</li>
+      </ul>
+
+      <h2>Pihak ketiga</h2>
+      <p>Tirai tidak mengirim data ke pihak ketiga. Huruf dan ikon dibundel di dalam ekstensi, jadi membuka popup tidak memicu request ke luar.</p>
+
+      <h2>Perubahan kebijakan</h2>
+      <p>Jika kebijakan ini berubah, versi terbaru akan diterbitkan di halaman ini dengan tanggal berlaku yang baru.</p>
+
+      <h2>Kontak</h2>
+      <p>Pertanyaan atau laporan masalah bisa dikirim lewat <a href="https://github.com/yudadwiptr/privacywaweb/issues" rel="noopener">GitHub Issues</a>.</p>
+
+      <p><small>Tirai adalah proyek independen dan tidak berafiliasi dengan WhatsApp atau Meta.</small></p>
+    </div>
+  </main>
+</body>
+</html>

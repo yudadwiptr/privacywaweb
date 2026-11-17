@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tirai</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <div class="brand">
+        <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="8" fill="var(--velvet)" />
+          <rect x="6" y="6.5" width="20" height="2.2" rx="1.1" fill="#fff" />
+          <rect x="7.2" y="10.5" width="5" height="15" rx="2.5" fill="#fff" />
+          <rect x="13.5" y="10.5" width="5" height="15" rx="2.5" fill="#fff" fill-opacity=".84" />
+          <rect x="19.8" y="10.5" width="5" height="15" rx="2.5" fill="#fff" fill-opacity=".64" />
+        </svg>
+        <div>
+          <h1>Tirai</h1>
+          <p>Privasi untuk WhatsApp Web</p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="icon-btn" id="lockBtn" type="button" hidden aria-label="Kunci WhatsApp Web sekarang" title="Kunci sekarang"></button>
+        <button class="icon-btn" id="themeBtn" type="button" aria-label="Ganti tema" title="Tema: ikuti sistem"></button>
+      </div>
+    </header>
+
+    <!-- The stage: a tiny chat window that the curtain drops over -->
+    <section class="stage" aria-label="Status perlindungan">
+      <div class="window" aria-hidden="true">
+        <div class="win-bar">
+          <span class="avatar"></span>
+          <span class="line w40"></span>
+        </div>
+        <div class="win-body">
+          <div class="bubble in"><span class="line w70"></span><span class="line w45"></span></div>
+          <div class="bubble out"><span class="line w60"></span></div>
+          <div class="bubble in photo"><span class="pic"></span></div>
+          <div class="bubble out"><span class="line w50"></span><span class="line w30"></span></div>
+        </div>
+        <div class="curtain">
+          <span class="rod"></span>
+        </div>
+      </div>
+
+      <div class="stage-row">
+        <div class="stage-text">
+          <h2 id="statusTitle">Tirai tertutup</h2>
+          <p id="statusSub">Chat disamarkan di web.whatsapp.com</p>
+        </div>
+        <label class="switch big">
+          <input type="checkbox" id="enabled" />
+          <span class="track"><span class="thumb"></span></span>
+          <span class="sr">Aktifkan Tirai</span>
+        </label>
+      </div>
+
+      <div class="strength">
+        <label for="blur">Ketebalan tirai</label>
+        <input type="range" id="blur" min="3" max="20" step="1" />
+        <output id="blurOut" for="blur">8 px</output>
+      </div>
+    </section>
+
+    <section class="group" id="lockGroup" aria-labelledby="lockTitle">
+      <h3 id="lockTitle">Kunci layar</h3>
+      <div class="list lock-list" id="lockPanel"></div>
+    </section>
+
+    <main id="groups"></main>
+
+    <footer class="foot">
+      <p><kbd>Alt</kbd><kbd>Shift</kbd><kbd>B</kbd> buka atau tutup tirai</p>
+      <p><kbd>Alt</kbd><kbd>Shift</kbd><kbd>L</kbd> kunci WhatsApp Web sekarang</p>
+      <p class="ver">Versi <span id="ver">1.0.0</span></p>
+    </footer>
+  </div>
+
+  <script src="../shared/defaults.js"></script>
+  <script src="../shared/lock.js"></script>
+  <script src="popup.js"></script>
+  <script src="lock-panel.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<title>Tirai lock preview</title>
+<style>
+  body { margin: 0; font: 14px system-ui; background: #e9edef; }
+  #app { display: grid; grid-template-columns: 300px 1fr; height: 100vh; }
+  #pane-side { background: #fff; padding: 12px; }
+  #main { padding: 24px; }
+  .message-in { background: #fff; padding: 8px 12px; border-radius: 8px; margin: 6px 0; width: fit-content; }
+</style>
+<script>
+  /* Dev-only stand-in for chrome.storage so the content scripts run on a normal page. */
+  (function () {
+    const listeners = [];
+    const mk = (areaName, prefix) => ({
+      async get(k) { try { return { [k]: JSON.parse(localStorage.getItem(prefix + k)) }; } catch { return {}; } },
+      async set(o) {
+        const changes = {};
+        for (const [k, v] of Object.entries(o)) {
+          let old; try { old = JSON.parse(localStorage.getItem(prefix + k)); } catch {}
+          localStorage.setItem(prefix + k, JSON.stringify(v));
+          changes[k] = { oldValue: old, newValue: v };
+        }
+        listeners.forEach((fn) => fn(changes, areaName));
+      }
+    });
+    window.chrome = { storage: { local: mk("local", "L:"), sync: mk("sync", "S:"), onChanged: { addListener: (fn) => listeners.push(fn) } } };
+  })();
+</script>
+<script src="../shared/defaults.js"></script>
+<script src="../shared/lock.js"></script>
+<script src="../content/lock.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div id="pane-side"><b>Chat</b><p>Budi: rapat jam 3</p></div>
+    <div id="main"><div class="message-in">Pesan rahasia di sini</div></div>
+  </div>
+</body>
+</html>

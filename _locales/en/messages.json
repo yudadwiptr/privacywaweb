@@ -1,0 +1,7 @@
+{
+  "appName": { "message": "Tirai: Privacy for WhatsApp Web" },
+  "appShortName": { "message": "Tirai" },
+  "appDescription": { "message": "Blur chats, photos, names and profile pictures on WhatsApp Web. Hover to peek, lock with a PIN when you step away." },
+  "cmdToggle": { "message": "Toggle blur" },
+  "cmdLock": { "message": "Lock WhatsApp Web now" }
+}

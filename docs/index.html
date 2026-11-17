@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tirai: Blur dan Kunci PIN untuk WhatsApp Web | Ekstensi Privasi Chrome</title>
+  <meta name="description" content="Tirai menyamarkan chat, foto, nama, dan foto profil di WhatsApp Web, lalu menguncinya dengan PIN saat kamu pergi. Gratis, tanpa iklan, tanpa mengirim data." />
+  <meta name="keywords" content="privasi WhatsApp Web, blur WhatsApp Web, kunci WhatsApp Web, sembunyikan chat WhatsApp Web, PIN WhatsApp Web, ekstensi Chrome WhatsApp, privacy WhatsApp Web" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="author" content="Tirai" />
+  <meta name="theme-color" content="#4a3ad8" />
+  <link rel="canonical" href="https://yudadwiptr.github.io/privacywaweb/" />
+  <link rel="alternate" hreflang="id" href="https://yudadwiptr.github.io/privacywaweb/" />
+  <link rel="alternate" hreflang="x-default" href="https://yudadwiptr.github.io/privacywaweb/" />
+
+  <!-- Icons -->
+  <link rel="icon" href="favicon.ico" sizes="48x48" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="id_ID" />
+  <meta property="og:site_name" content="Tirai" />
+  <meta property="og:title" content="Tirai: Blur dan Kunci PIN untuk WhatsApp Web" />
+  <meta property="og:description" content="Samarkan chat WhatsApp Web dari orang yang lewat. Arahkan kursor untuk melihat, kunci dengan PIN saat kamu pergi." />
+  <meta property="og:url" content="https://yudadwiptr.github.io/privacywaweb/" />
+  <meta property="og:image" content="https://yudadwiptr.github.io/privacywaweb/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Jendela WhatsApp Web dengan chat yang diburamkan oleh Tirai" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Tirai: Blur dan Kunci PIN untuk WhatsApp Web" />
+  <meta name="twitter:description" content="Samarkan chat WhatsApp Web dari orang yang lewat. Arahkan kursor untuk melihat, kunci dengan PIN saat kamu pergi." />
+  <meta name="twitter:image" content="https://yudadwiptr.github.io/privacywaweb/og-image.png" />
+
+  <link rel="preload" href="fonts/PlusJakartaSans.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="stylesheet" href="site.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Tirai",
+        "alternateName": "Tirai: Privasi untuk WhatsApp Web",
+        "description": "Ekstensi browser yang menyamarkan chat, media, nama, dan foto profil di WhatsApp Web, serta mengunci WhatsApp Web dengan PIN.",
+        "applicationCategory": "BrowserApplication",
+        "applicationSubCategory": "Privacy",
+        "operatingSystem": "Google Chrome, Microsoft Edge, Brave, Opera, Firefox",
+        "inLanguage": "id",
+        "url": "https://yudadwiptr.github.io/privacywaweb/",
+        "image": "https://yudadwiptr.github.io/privacywaweb/icon-512.png",
+        "softwareVersion": "1.0.0",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "IDR" },
+        "codeRepository": "https://github.com/yudadwiptr/privacywaweb"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Apakah Tirai membaca atau mengirim chat WhatsApp saya?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Tidak. Tirai hanya menambahkan efek blur lewat CSS di halaman WhatsApp Web. Tirai tidak membaca isi pesan, tidak punya server, dan tidak mengirim data ke mana pun." }
+          },
+          {
+            "@type": "Question",
+            "name": "Bagaimana cara melihat pesan yang diburamkan?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Arahkan kursor ke pesan, foto, atau nama yang diburamkan. Kamu juga bisa membuka atau menutup semua blur dengan Alt+Shift+B." }
+          },
+          {
+            "@type": "Question",
+            "name": "Apa yang terjadi kalau saya lupa PIN?",
+            "acceptedAnswer": { "@type": "Answer", "text": "PIN tidak disimpan dalam bentuk asli, jadi tidak bisa dipulihkan. Hapus lalu pasang ulang ekstensi Tirai untuk mengatur PIN baru. Akun WhatsApp kamu tidak terpengaruh." }
+          },
+          {
+            "@type": "Question",
+            "name": "Apakah kunci PIN Tirai sama amannya dengan mengunci komputer?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Belum. Kunci PIN mencegah orang lain melihat WhatsApp Web saat kamu pergi sebentar, tapi orang yang paham bisa mematikan ekstensi lewat pengaturan browser. Untuk perlindungan penuh, kunci juga komputer kamu." }
+          },
+          {
+            "@type": "Question",
+            "name": "Browser apa saja yang didukung?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Google Chrome, Microsoft Edge, Brave, Opera, dan browser berbasis Chromium lainnya. Versi Firefox sedang disiapkan." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#isi">Lewati ke konten</a>
+
+  <header class="site-head">
+    <div class="wrap">
+      <a class="logo" href="./" aria-label="Tirai, beranda">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="7.5" fill="var(--velvet)" />
+          <rect x="6" y="6.5" width="20" height="2.2" rx="1.1" fill="#fff" />
+          <rect x="7.2" y="10.5" width="5" height="15" rx="2.5" fill="#fff" />
+          <rect x="13.5" y="10.5" width="5" height="15" rx="2.5" fill="#fff" fill-opacity=".84" />
+          <rect x="19.8" y="10.5" width="5" height="15" rx="2.5" fill="#fff" fill-opacity=".64" />
+        </svg>
+        Tirai
+      </a>
+      <nav class="nav" aria-label="Utama">
+        <a href="#fitur">Fitur</a>
+        <a href="#kunci">Kunci PIN</a>
+        <a href="#privasi">Privasi</a>
+        <a href="#tanya">Tanya jawab</a>
+        <a class="btn primary small" href="#pasang">Pasang gratis</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="isi">
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <h1>Chat WhatsApp Web kamu, tertutup dari mata yang lewat.</h1>
+          <p class="lede">Tirai memburamkan pesan, foto, nama, dan foto profil di WhatsApp Web. Arahkan kursor untuk melihat, dan kunci dengan PIN saat kamu pergi.</p>
+          <div class="ctas">
+            <a class="btn primary" href="#pasang">Pasang gratis</a>
+            <a class="btn quiet" href="https://github.com/yudadwiptr/privacywaweb" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.7.3 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg>
+              Kode sumber
+            </a>
+          </div>
+          <p class="note">Gratis dan tanpa iklan. Untuk Chrome, Edge, Brave, dan Opera.</p>
+        </div>
+
+        <div class="demo" id="demo">
+          <div class="frame">
+            <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>web.whatsapp.com</span></div>
+            <div class="app" aria-label="Contoh WhatsApp Web dengan Tirai aktif">
+              <aside class="chats">
+                <div class="chat-row active"><span class="av a1 blurable"></span><span class="who"><b class="blurable">Rina Kantor</b><small class="blurable">Jangan bilang siapa-siapa dulu ya</small></span><span class="time">09.41</span></div>
+                <div class="chat-row"><span class="av a2 blurable"></span><span class="who"><b class="blurable">Arisan RT 04</b><small class="blurable">Bu Sri: Giliran bulan depan siapa?</small></span><span class="time">09.12</span></div>
+                <div class="chat-row"><span class="av a3 blurable"></span><span class="who"><b class="blurable">Bang Dimas</b><small class="blurable">Transfernya udah masuk, makasih</small></span><span class="time">Kemarin</span></div>
+                <div class="chat-row"><span class="av a4 blurable"></span><span class="who"><b class="blurable">Ibu</b><small class="blurable">Nanti pulang jam berapa?</small></span><span class="time">Kemarin</span></div>
+                <div class="chat-row"><span class="av a5 blurable"></span><span class="who"><b class="blurable">Kurir Paket</b><small class="blurable">Paket sudah di depan pagar</small></span><span class="time">Senin</span></div>
+              </aside>
+              <div class="room">
+                <div class="room-head"><span class="av a1 blurable"></span><b class="blurable">Rina Kantor</b></div>
+                <div class="msgs">
+                  <div class="msg blurable">Jadi naik jabatan nggak? Ceritain dong</div>
+                  <div class="msg out blurable">Sst, nanti pas makan siang aja</div>
+                  <div class="msg photo blurable"><div class="photo-art"></div></div>
+                  <div class="msg blurable">Jangan bilang siapa-siapa dulu ya</div>
+                </div>
+                <div class="composer"><span class="typing blurable">Aman. Bos lagi lewat nih</span></div>
+              </div>
+            </div>
+            <div class="sweep" aria-hidden="true"></div>
+            <div class="lockscreen" aria-hidden="true" id="demoLock">
+              <div class="card">
+                <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7.5" fill="var(--velvet)" /><rect x="6" y="6.5" width="20" height="2.2" rx="1.1" fill="#fff" /><rect x="7.2" y="10.5" width="5" height="15" rx="2.5" fill="#fff" /><rect x="13.5" y="10.5" width="5" height="15" rx="2.5" fill="#fff" fill-opacity=".84" /><rect x="19.8" y="10.5" width="5" height="15" rx="2.5" fill="#fff" fill-opacity=".64" /></svg>
+                <h3>WhatsApp Web terkunci</h3>
+                <p>Masukkan PIN Tirai untuk melanjutkan</p>
+                <div class="slots" id="demoSlots"><span></span><span></span><span></span><span></span>
+                  <input id="demoPin" type="password" inputmode="numeric" maxlength="4" autocomplete="off" aria-label="PIN demo" tabindex="-1" />
+                </div>
+                <p class="hint">PIN contoh: 1234</p>
+              </div>
+            </div>
+          </div>
+          <div class="controls">
+            <label class="toggle"><input type="checkbox" id="demoToggle" checked /><span class="track"></span> Tirai aktif</label>
+            <span>Arahkan kursor ke chat untuk mengintip</span>
+            <button class="btn quiet small" type="button" id="demoLockBtn">Coba kunci PIN</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band paper" id="fitur">
+      <div class="wrap">
+        <h2>Pilih sendiri apa yang ditutup</h2>
+        <p class="intro">Setiap bagian WhatsApp Web bisa diburamkan sendiri-sendiri. Arahkan kursor ke bagian yang buram untuk melihatnya sebentar.</p>
+        <ul class="features">
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/><path d="M8.5 10.5h7M8.5 13.5h4.5"/></svg></span>
+            <div><h3>Isi pesan</h3><p>Semua gelembung chat di ruang obrolan, termasuk lampiran.</p></div></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 9h10M7 13h6"/></svg></span>
+            <div><h3>Pratinjau pesan terakhir</h3><p>Cuplikan pesan di daftar chat, jadi kabar baru tidak terbaca sekilas.</p></div></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-8 9"/></svg></span>
+            <div><h3>Foto dan video</h3><p>Media di dalam chat dan di galeri info kontak.</p></div></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="10" rx="3"/><path d="M7 12h.01M11 12h.01M15 12h2"/></svg></span>
+            <div><h3>Kolom ketik</h3><p>Teks yang sedang kamu tulis tetap tertutup sampai kamu mengarahkan kursor.</p></div></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="10" r="3"/><path d="M6.5 18.2a6.5 6.5 0 0 1 11 0"/></svg></span>
+            <div><h3>Foto profil</h3><p>Foto kontak, grup, dan dirimu sendiri.</p></div></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V5h16v2M12 5v14M9 19h6"/></svg></span>
+            <div><h3>Nama kontak dan grup</h3><p>Di daftar chat dan di judul obrolan.</p></div></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+            <div><h3>Tutup saat ditinggal</h3><p>Seluruh layar diburamkan setelah beberapa saat tanpa aktivitas.</p></div></li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 5 13h6l-1 8 8-10h-6l1-8Z"/></svg></span>
+            <div><h3>Satu tombol untuk semua</h3><p>Buka atau tutup semua blur dengan <kbd>Alt</kbd> <kbd>Shift</kbd> <kbd>B</kbd>, dan atur ketebalannya sesuai selera.</p></div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="band" id="kunci">
+      <div class="wrap split">
+        <div>
+          <h2>Pergi sebentar? Kunci dengan PIN.</h2>
+          <p class="intro">Saat terkunci, WhatsApp Web disembunyikan sepenuhnya di semua tab sampai PIN yang benar dimasukkan.</p>
+          <ul class="ticks">
+            <li>Kunci sekarang dari popup atau dengan <kbd>Alt</kbd> <kbd>Shift</kbd> <kbd>L</kbd></li>
+            <li>Terkunci otomatis setelah 1 menit sampai 1 jam tanpa aktivitas</li>
+            <li>Terkunci lagi setiap kali browser dibuka</li>
+            <li>Setiap 5 kali PIN salah, percobaan ditahan dan jedanya terus bertambah</li>
+            <li>PIN tidak pernah disimpan, hanya hash-nya</li>
+          </ul>
+        </div>
+        <div class="lock-figure" aria-hidden="true">
+          <div class="card">
+            <svg viewBox="0 0 32 32"><rect width="32" height="32" rx="7.5" fill="var(--velvet)" /><rect x="6" y="6.5" width="20" height="2.2" rx="1.1" fill="#fff" /><rect x="7.2" y="10.5" width="5" height="15" rx="2.5" fill="#fff" /><rect x="13.5" y="10.5" width="5" height="15" rx="2.5" fill="#fff" fill-opacity=".84" /><rect x="19.8" y="10.5" width="5" height="15" rx="2.5" fill="#fff" fill-opacity=".64" /></svg>
+            <h3>WhatsApp Web terkunci</h3>
+            <p>Masukkan PIN Tirai untuk melanjutkan</p>
+            <div class="slots"><span></span><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band paper" id="privasi">
+      <div class="wrap">
+        <h2>Privasi, termasuk dari kami</h2>
+        <p class="promise">Tirai tidak membaca, menyimpan, atau mengirim isi chat kamu. Tidak ada server, tidak ada analitik.</p>
+        <div class="facts">
+          <div><h3>Hanya di WhatsApp Web</h3><p>Ekstensi ini cuma berjalan di web.whatsapp.com. Situs lain tidak disentuh.</p></div>
+          <div><h3>Cara kerjanya sederhana</h3><p>Blur dipasang lewat CSS di browser kamu. Pesannya sendiri tidak pernah dibaca.</p></div>
+          <div><h3>Kode terbuka</h3><p>Semua kode bisa diperiksa di GitHub. Baca juga <a href="privacy.html">kebijakan privasi</a>.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="pasang">
+      <div class="wrap">
+        <h2>Pasang dalam semenit</h2>
+        <p class="intro">Tirai sedang dalam proses peninjauan Chrome Web Store. Sambil menunggu, kamu bisa memasangnya langsung dari kode sumber.</p>
+        <ol class="steps">
+          <li><h3>Unduh kode</h3><p>Buka <a href="https://github.com/yudadwiptr/privacywaweb" rel="noopener">repositori GitHub</a>, pilih Code, lalu Download ZIP. Ekstrak ke satu folder.</p></li>
+          <li><h3>Buka halaman ekstensi</h3><p>Ketik <kbd>chrome://extensions</kbd> di address bar, lalu nyalakan Developer mode di pojok kanan atas.</p></li>
+          <li><h3>Muat Tirai</h3><p>Klik Load unpacked, pilih folder tadi, lalu buka web.whatsapp.com. Selesai.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="band paper" id="tanya">
+      <div class="wrap">
+        <h2>Tanya jawab</h2>
+        <div class="faq">
+          <details open>
+            <summary>Apakah Tirai membaca atau mengirim chat WhatsApp saya?</summary>
+            <p>Tidak. Tirai hanya menambahkan efek blur lewat CSS di halaman WhatsApp Web. Tirai tidak membaca isi pesan, tidak punya server, dan tidak mengirim data ke mana pun.</p>
+          </details>
+          <details>
+            <summary>Bagaimana cara melihat pesan yang diburamkan?</summary>
+            <p>Arahkan kursor ke pesan, foto, atau nama yang diburamkan. Kamu juga bisa membuka atau menutup semua blur dengan Alt+Shift+B.</p>
+          </details>
+          <details>
+            <summary>Apa yang terjadi kalau saya lupa PIN?</summary>
+            <p>PIN tidak disimpan dalam bentuk asli, jadi tidak bisa dipulihkan. Hapus lalu pasang ulang ekstensi Tirai untuk mengatur PIN baru. Akun WhatsApp kamu tidak terpengaruh.</p>
+          </details>
+          <details>
+            <summary>Apakah kunci PIN Tirai sama amannya dengan mengunci komputer?</summary>
+            <p>Belum. Kunci PIN mencegah orang lain melihat WhatsApp Web saat kamu pergi sebentar, tapi orang yang paham bisa mematikan ekstensi lewat pengaturan browser. Untuk perlindungan penuh, kunci juga komputer kamu.</p>
+          </details>
+          <details>
+            <summary>Browser apa saja yang didukung?</summary>
+            <p>Google Chrome, Microsoft Edge, Brave, Opera, dan browser berbasis Chromium lainnya. Versi Firefox sedang disiapkan.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="wrap">
+      <p>Tirai adalah proyek independen dan tidak berafiliasi dengan WhatsApp atau Meta. WhatsApp adalah merek dagang milik WhatsApp LLC.</p>
+      <nav aria-label="Tautan kaki">
+        <a href="privacy.html">Kebijakan privasi</a>
+        <a href="https://github.com/yudadwiptr/privacywaweb" rel="noopener">GitHub</a>
+        <a href="https://github.com/yudadwiptr/privacywaweb/issues" rel="noopener">Laporkan masalah</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="site.js" defer></script>
+</body>
+</html>

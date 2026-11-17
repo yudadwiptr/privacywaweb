@@ -1,0 +1,7 @@
+{
+  "appName": { "message": "Tirai: Privasi untuk WhatsApp Web" },
+  "appShortName": { "message": "Tirai" },
+  "appDescription": { "message": "Blur chat, foto, nama, dan foto profil di WhatsApp Web. Arahkan kursor untuk melihat, kunci dengan PIN saat ditinggal." },
+  "cmdToggle": { "message": "Buka atau tutup tirai" },
+  "cmdLock": { "message": "Kunci WhatsApp Web sekarang" }
+}

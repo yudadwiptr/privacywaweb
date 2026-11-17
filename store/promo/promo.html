@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<title>Tirai promo</title>
+<!-- Renders store/social images. Open with ?k=og|marquee|tile|shot-blur|shot-popup|shot-lock
+     and screenshot at the size listed in SIZES (tools/render-promo.ps1 does this). -->
+<link rel="stylesheet" href="../../docs/site.css" />
+<style>
+  html, body { margin: 0; overflow: hidden; }
+  body { width: var(--w); height: var(--h); position: relative; }
+  .bg {
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(90deg, rgba(74,58,216,.07) 0, rgba(74,58,216,.015) 60px, rgba(74,58,216,.07) 120px), var(--mist);
+  }
+  .bg::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 10px; background: var(--velvet); }
+  .brand { display: flex; align-items: center; gap: 14px; font-weight: 800; letter-spacing: -0.02em; }
+  .brand svg { flex: none; }
+  .copy { position: absolute; }
+  .copy h1 { margin: 0; font-weight: 800; letter-spacing: -0.035em; line-height: 1.05; text-wrap: balance; }
+  .copy p { margin: 0; color: var(--slate); }
+  .stage { position: absolute; }
+  .stage .frame { transform-origin: top left; }
+  .demo.on .blurable { filter: blur(7px); }
+  .demo.on .peek, .demo.on .peek .blurable { filter: none; }
+  .popup-card { position: absolute; background: var(--paper); border-radius: 16px; box-shadow: var(--shadow); overflow: hidden; border: 1px solid var(--hair); }
+  .popup-card iframe { border: 0; display: block; }
+  .shot-frame { position: absolute; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--hair); background: var(--paper); }
+  .shot-frame iframe { border: 0; display: block; }
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div id="root"></div>
+<script>
+(async function () {
+  const k = new URLSearchParams(location.search).get("k") || "og";
+  const SIZES = { og: [1200, 630], marquee: [1400, 560], tile: [440, 280], "shot-blur": [1280, 800], "shot-popup": [1280, 800], "shot-lock": [1280, 800] };
+  const [w, h] = SIZES[k];
+  document.body.style.setProperty("--w", w + "px");
+  document.body.style.setProperty("--h", h + "px");
+  const root = document.getElementById("root");
+
+  const MARK = (s) => `<svg width="${s}" height="${s}" viewBox="0 0 32 32"><rect width="32" height="32" rx="7.5" fill="#4a3ad8"/><rect x="6" y="6.5" width="20" height="2.2" rx="1.1" fill="#fff"/><rect x="7.2" y="10.5" width="5" height="15" rx="2.5" fill="#fff"/><rect x="13.5" y="10.5" width="5" height="15" rx="2.5" fill="#fff" fill-opacity=".84"/><rect x="19.8" y="10.5" width="5" height="15" rx="2.5" fill="#fff" fill-opacity=".64"/></svg>`;
+
+  async function demoFrame({ peek } = {}) {
+    const html = await (await fetch("../../docs/index.html")).text();
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    const frame = doc.querySelector("#demo .frame");
+    frame.querySelector(".lockscreen").remove();
+    const wrap = document.createElement("div");
+    wrap.className = "demo on";
+    wrap.appendChild(document.importNode(frame, true));
+    if (peek) wrap.querySelectorAll(".msg")[peek].classList.add("peek");
+    return wrap;
+  }
+
+  function place(el, css) { Object.assign(el.style, css); return el; }
+
+  if (k === "og" || k === "marquee") {
+    const big = k === "marquee";
+    root.innerHTML = `
+      <div class="copy" style="left:${big ? 88 : 72}px; top:${big ? 92 : 86}px; width:${big ? 520 : 470}px">
+        <div class="brand" style="font-size:${big ? 30 : 28}px; margin-bottom:${big ? 34 : 38}px">${MARK(big ? 52 : 48)}Tirai</div>
+        <h1 style="font-size:${big ? 60 : 58}px; margin-bottom:22px">Blur dan kunci PIN untuk WhatsApp Web</h1>
+        <p style="font-size:${big ? 22 : 22}px">Gratis, tanpa iklan, tanpa mengirim data.</p>
+      </div>`;
+    const stage = place(document.createElement("div"), { left: (big ? 680 : 600) + "px", top: (big ? 70 : 92) + "px", width: "760px" });
+    stage.className = "stage";
+    stage.appendChild(await demoFrame({ peek: 1 }));
+    stage.querySelector(".frame").style.transform = `scale(${big ? 1.05 : 1.05})`;
+    root.appendChild(stage);
+  }
+
+  if (k === "tile") {
+    root.innerHTML = `
+      <div class="copy" style="left:40px; top:52px; width:360px">
+        ${MARK(72)}
+        <h1 style="font-size:44px; margin:22px 0 8px">Tirai</h1>
+        <p style="font-size:19px; color:var(--ink); font-weight:600">Blur dan kunci PIN<br />untuk WhatsApp Web</p>
+      </div>`;
+  }
+
+  if (k === "shot-blur") {
+    root.innerHTML = `
+      <div class="copy" style="left:80px; top:84px; width:1120px">
+        <h1 style="font-size:46px; margin-bottom:12px">Chat tertutup dari mata yang lewat</h1>
+        <p style="font-size:21px">Arahkan kursor ke pesan untuk melihatnya sebentar.</p>
+      </div>`;
+    const stage = place(document.createElement("div"), { left: "80px", top: "250px", width: "1120px" });
+    stage.className = "stage";
+    stage.appendChild(await demoFrame({ peek: 1 }));
+    stage.querySelector(".app").style.height = "460px";
+    root.appendChild(stage);
+  }
+
+  if (k === "shot-popup") {
+    localStorage.setItem("tirai", JSON.stringify({ theme: "light" }));
+    localStorage.setItem("tiraiLock", JSON.stringify({ hash: "x", salt: "x", pinLength: 4, autoLock: 300 }));
+    root.innerHTML = `
+      <div class="copy" style="left:96px; top:250px; width:560px">
+        <div class="brand" style="font-size:26px; margin-bottom:30px">${MARK(44)}Tirai</div>
+        <h1 style="font-size:50px; margin-bottom:18px">Atur semuanya dari satu popup</h1>
+        <p style="font-size:21px">Pilih bagian yang diburamkan, atur ketebalan blur, dan aktifkan kunci PIN.</p>
+      </div>
+      <div class="popup-card" style="left:760px; top:40px; width:362px; height:720px">
+        <iframe src="../../popup/popup.html" width="362" height="1100" scrolling="no"></iframe>
+      </div>`;
+  }
+
+  if (k === "shot-lock") {
+    localStorage.setItem("L:tiraiLock", JSON.stringify({ hash: "x", salt: "eA==", iterations: 1, pinLength: 4, locked: true, autoLock: 300 }));
+    localStorage.setItem("tirai-lock-hint", "1");
+    root.innerHTML = `
+      <div class="copy" style="left:80px; top:70px; width:1120px">
+        <h1 style="font-size:46px; margin-bottom:12px">Pergi sebentar? Kunci dengan PIN</h1>
+        <p style="font-size:21px">Terkunci otomatis saat ditinggal, saat browser dibuka, atau dengan Alt+Shift+L.</p>
+      </div>
+      <div class="shot-frame" style="left:80px; top:230px; width:1120px; height:520px">
+        <iframe src="../../tools/lock-preview.html" width="1120" height="520"></iframe>
+      </div>`;
+  }
+
+  document.fonts && (await document.fonts.ready);
+  setTimeout(() => document.body.setAttribute("data-ready", ""), 600);
+})();
+</script>
+</body>
+</html>
