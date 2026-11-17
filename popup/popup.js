@@ -183,9 +183,40 @@
     if (state.theme === "system") document.documentElement.removeAttribute("data-theme");
     else document.documentElement.setAttribute("data-theme", state.theme);
     const btn = $("#themeBtn");
-    btn.innerHTML = state.theme === "light" ? ICONS.sun : state.theme === "dark" ? ICONS.moon : ICONS.auto;
+    // Only swap the icon when the theme changed, so its spin-in animation doesn't
+    // replay every time a slider or switch repaints the popup.
+    if (btn.dataset.theme !== state.theme) {
+      btn.innerHTML = state.theme === "light" ? ICONS.sun : state.theme === "dark" ? ICONS.moon : ICONS.auto;
+      btn.dataset.theme = state.theme;
+    }
     btn.title = `Tema: ${THEME_LABEL[state.theme]}`;
     btn.setAttribute("aria-label", `Ganti tema, sekarang ${THEME_LABEL[state.theme]}`);
+  }
+
+  /* Theme switch: the new theme spreads out as a circle from the theme button
+     (View Transitions). Browsers without it get a short colour fade instead. */
+  function switchTheme(update, origin) {
+    const root = document.documentElement;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return update();
+
+    if (!document.startViewTransition) {
+      root.classList.add("theme-fade");
+      update();
+      setTimeout(() => root.classList.remove("theme-fade"), 450);
+      return;
+    }
+
+    const r = origin.getBoundingClientRect();
+    const x = r.left + r.width / 2;
+    const y = r.top + r.height / 2;
+    const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    const transition = document.startViewTransition(update);
+    transition.ready.then(() => {
+      root.animate(
+        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+        { duration: 520, easing: "cubic-bezier(.65, 0, .25, 1)", pseudoElement: "::view-transition-new(root)" }
+      );
+    }).catch(() => {});
   }
 
   async function init() {
@@ -195,9 +226,10 @@
 
     $("#enabled").addEventListener("change", (e) => { state.enabled = e.target.checked; save(); });
     $("#blur").addEventListener("input", (e) => { state.blur = Number(e.target.value); save(); });
-    $("#themeBtn").addEventListener("click", () => {
+    $("#themeBtn").addEventListener("click", (e) => {
+      // Record the choice now so fast double clicks keep cycling; the transition only repaints.
       state.theme = THEMES[(THEMES.indexOf(state.theme) + 1) % THEMES.length];
-      save();
+      switchTheme(save, e.currentTarget);
     });
 
     if (hasChrome) {

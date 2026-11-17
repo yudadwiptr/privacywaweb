@@ -106,6 +106,30 @@ body {
 }
 .icon-btn:hover { border-color: var(--velvet); color: var(--velvet); }
 .icon-btn svg { width: 17px; height: 17px; }
+#themeBtn svg { animation: theme-icon .45s cubic-bezier(.3, .7, .4, 1.25); }
+@keyframes theme-icon { from { transform: rotate(-120deg) scale(.5); opacity: 0; } }
+
+/* Scrollbar: thin pill in the theme's colours, no arrow buttons */
+html { background: var(--mist); }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--track-off);
+  border: 3px solid transparent; background-clip: padding-box; border-radius: 999px;
+  min-height: 40px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--velvet); background-clip: padding-box; border-width: 2px; }
+::-webkit-scrollbar-button { display: none; height: 0; }
+@supports not selector(::-webkit-scrollbar) {
+  html { scrollbar-width: thin; scrollbar-color: var(--track-off) transparent; }
+}
+
+/* Theme change: circle reveal via View Transitions, colour fade as fallback */
+::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-new(root) { z-index: 2; }
+.theme-fade, .theme-fade *, .theme-fade *::before, .theme-fade *::after {
+  transition: background-color .4s ease, border-color .4s ease, color .4s ease, fill .4s ease, box-shadow .4s ease !important;
+}
 
 /* Stage */
 .stage {
