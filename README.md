@@ -88,10 +88,16 @@ Folder `docs/` berisi landing page dengan SEO (meta tag, Open Graph, JSON-LD, si
 | `tools/render-promo.ps1` | Merender gambar OG, tile promo, dan screenshot store dengan Chrome headless |
 | `tools/build.py` | Membuat ZIP untuk tiap store |
 | `tools/lock-preview.html` | Halaman uji layar kunci tanpa memasang ekstensi |
+| `tools/media-test.html` | Halaman uji blur foto tanpa memasang ekstensi |
+| `tools/diagnose-wa.js` | Skrip Console untuk melaporkan struktur WhatsApp Web (tanpa isi chat) |
 
 ## Kalau ada bagian yang tidak ter-blur
 
 WhatsApp Web sering mengganti struktur HTML-nya. Semua selector ada di objek `SELECTORS` di `content/content.js`. Inspect elemen yang lolos di DevTools, lalu tambahkan selector-nya ke kategori yang sesuai. Selector yang tidak valid atau tidak cocok diabaikan dengan aman karena dibungkus `:is()`.
+
+Cara cepat: buka chat yang ada fotonya, tempel isi `tools/diagnose-wa.js` di DevTools Console, lalu kirim laporan JSON yang tersalin ke clipboard. Laporan itu hanya berisi nama tag, atribut, dan class, tanpa isi chat.
+
+Foto dan video dikenali dari sumbernya (`blob:`, CDN media WhatsApp, atau thumbnail JPEG), bukan dari class, jadi lebih tahan terhadap perubahan tampilan WhatsApp.
 
 ## Pratinjau tanpa memasang ekstensi
 

@@ -10,6 +10,20 @@
 (function () {
   const { STORAGE_KEY, withDefaults } = self.TIRAI;
 
+  /* Media is matched by where the image comes from, not by class names: WhatsApp Web's
+     newer builds use generated classes that change, but chat media is always a blob:
+     URL, a WhatsApp media-CDN URL, or an inline JPEG/WebP thumbnail. Profile pictures
+     come from pps.whatsapp.net and are left to the "avatars" category. */
+  const NOT_AVATAR = ':not([src*="pps.whatsapp.net"])';
+  const MEDIA_SOURCES = [
+    `img[src^="blob:"]${NOT_AVATAR}`,
+    'img[src*="mmg.whatsapp.net"]',
+    'img[src*=".cdn.whatsapp.net"]',
+    'img[src^="data:image/jpeg"]',
+    'img[src^="data:image/webp"]',
+    "video"
+  ];
+
   const SELECTORS = {
     messages: [
       "#main .message-in",
@@ -28,6 +42,7 @@
       '[data-animate-modal-body] [contenteditable="true"]'
     ],
     media: [
+      ...MEDIA_SOURCES,
       "#main .message-in img:not(.emoji):not([data-plain-text])",
       "#main .message-out img:not(.emoji):not([data-plain-text])",
       "#main .message-in video",
@@ -37,6 +52,7 @@
       "#main canvas"
     ],
     gallery: [
+      ...MEDIA_SOURCES.map((s) => `[role="dialog"] ${s}`),
       "[data-animate-media-viewer] img",
       "[data-animate-media-viewer] video",
       '[data-testid="media-viewer-modal"] img',
@@ -80,7 +96,9 @@
       const sel = `:is(${list.join(", ")})`;
       out.push(`${scope}${sel}{filter:blur(${s.blur}px) !important;transition:${ease} !important;}`);
       if (item.hover) {
-        out.push(`${scope}${sel}:hover{filter:none !important;}`);
+        // Also reveal when hovering the direct parent: WhatsApp lays overlays (time, ticks,
+        // download button) over photos, so the cursor often never touches the <img> itself.
+        out.push(`${scope}${sel}:hover, ${scope}:hover > ${sel}{filter:none !important;}`);
       }
     }
 

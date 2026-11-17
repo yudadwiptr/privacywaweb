@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<title>Tirai media test</title>
+<!-- Dev-only: checks the generated blur CSS against media markup without #main / .message-in. -->
+<script>
+  window.chrome = { storage: { sync: { get: async () => ({ tirai: { items: { media: { on: true, hover: true }, avatars: { on: false } } } }) }, onChanged: { addListener() {} } } };
+</script>
+<script src="../shared/defaults.js"></script>
+<script src="../content/content.js"></script>
+<style>body{font:14px system-ui;padding:20px} .wrap{position:relative;display:inline-block;margin:8px} .wrap span{position:absolute;right:6px;bottom:6px;background:#0008;color:#fff;padding:2px 6px;border-radius:6px}</style>
+</head>
+<body>
+  <div class="wrap" id="chatPhoto"><img id="blobImg" width="200" height="120" alt="" /><span>18:21 ✓✓</span></div>
+  <div class="wrap"><img id="thumb" width="120" height="80" alt="" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDA==" /></div>
+  <div class="wrap"><img id="avatar" width="40" height="40" alt="" src="https://pps.whatsapp.net/v/t61/x.jpg" /></div>
+  <script>
+    const c = document.createElement("canvas"); c.width = 200; c.height = 120;
+    const g = c.getContext("2d"); g.fillStyle = "#4a3ad8"; g.fillRect(0, 0, 200, 120);
+    c.toBlob((b) => { document.getElementById("blobImg").src = URL.createObjectURL(b); });
+  </script>
+</body>
+</html>

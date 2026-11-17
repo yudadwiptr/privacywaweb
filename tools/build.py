@@ -27,12 +27,17 @@ def files():
 
 
 def manifest_for(target, base):
+    """manifest.json in the repo is the Chrome one (so Load unpacked works). Firefox gets its tweaks here."""
     m = json.loads(json.dumps(base))
-    if target == "chrome":
-        m["background"] = {"service_worker": "background.js"}
-        m.pop("browser_specific_settings", None)
-    else:
-        m["background"] = {"scripts": base["background"]["scripts"]}
+    if target == "firefox":
+        m["background"] = {"scripts": ["shared/defaults.js", "shared/lock.js", "background.js"]}
+        m["browser_specific_settings"] = {
+            "gecko": {
+                "id": "tirai@yudadwiptr.github.io",
+                "strict_min_version": "128.0",
+                "data_collection_permissions": {"required": ["none"]},
+            }
+        }
     return m
 
 
